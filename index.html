@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Restaurante do cremosin — Cardápio Digital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand">
+      <span class="brand-mark">CO</span>
+      <div class="brand-text">
+        <h1>Cantina Oliveira</h1>
+        <p>Cozinha italiana &amp; brasileira, à sua mesa</p>
+      </div>
+    </div>
+    <button class="cart-toggle" id="cart-toggle" aria-label="Abrir meu pedido">
+      Meu pedido
+      <span class="cart-count-badge" id="cart-count-badge">0</span>
+    </button>
+  </div>
+</header>
+
+<div class="search-bar-wrap">
+  <div class="search-bar">
+    <input type="text" id="search-input" placeholder="Buscar prato pelo nome…" aria-label="Buscar produto">
+    <span id="results-count" class="results-count">150 itens</span>
+  </div>
+  <nav class="category-nav" id="category-nav" aria-label="Categorias do cardápio"></nav>
+</div>
+
+<main class="layout">
+  <section class="menu-panel">
+    <div id="menu-grid"></div>
+  </section>
+
+  <aside class="order-panel" id="order-panel">
+    <div class="order-panel-header">
+      <h2>Meu Pedido</h2>
+      <button class="order-panel-close" id="order-panel-close" aria-label="Fechar meu pedido">✕</button>
+    </div>
+
+    <p id="order-empty" class="order-empty">Seu pedido está vazio. Escolha itens no cardápio para começar.</p>
+
+    <ul class="order-list" id="order-list"></ul>
+
+    <div class="order-summary">
+      <label class="waiter-fee-row">
+        <span>Incluir 10% do garçom</span>
+        <input type="checkbox" id="waiter-fee-toggle" checked>
+      </label>
+
+      <div class="totals-row">
+        <span>Subtotal</span>
+        <span id="subtotal-value">R$ 0,00</span>
+      </div>
+      <div class="totals-row">
+        <span>Garçom (10%)</span>
+        <span id="waiter-fee-value">R$ 0,00</span>
+      </div>
+      <div class="totals-row totals-row-final">
+        <span>Total</span>
+        <span id="total-value">R$ 0,00</span>
+      </div>
+
+      <button class="btn-finalize" id="finalize-btn" disabled>Finalizar pedido</button>
+    </div>
+  </aside>
+</main>
+
+<!-- Modal: dados do cliente -->
+<dialog id="checkout-modal" class="modal">
+  <form id="checkout-form" class="modal-form">
+    <div class="modal-header">
+      <h2>Antes de finalizar</h2>
+      <button type="button" class="modal-close" id="modal-close" aria-label="Fechar">✕</button>
+    </div>
+    <label class="field">
+      <span>Nome do cliente</span>
+      <input type="text" id="customer-name" required placeholder="Como podemos te chamar?">
+    </label>
+    <label class="field">
+      <span>Número da mesa</span>
+      <input type="text" id="table-number" required placeholder="Ex.: 12">
+    </label>
+    <button type="submit" class="btn-finalize">Confirmar pedido</button>
+  </form>
+</dialog>
+
+<!-- Modal: resumo do pedido -->
+<dialog id="summary-modal" class="modal">
+  <div class="modal-header">
+    <h2>Pedido confirmado</h2>
+    <button type="button" class="modal-close" id="summary-close" aria-label="Fechar">✕</button>
+  </div>
+  <div id="summary-content"></div>
+  <button type="button" class="btn-finalize" id="new-order-btn">Fazer novo pedido</button>
+</dialog>
+
+<script src="script.js"></script>
+<script>
+  // Abrir/fechar painel do carrinho em telas menores
+  const cartToggle = document.getElementById("cart-toggle");
+  const orderPanel = document.getElementById("order-panel");
+  const orderPanelClose = document.getElementById("order-panel-close");
+
+  cartToggle.addEventListener("click", () => orderPanel.classList.add("is-open"));
+  orderPanelClose.addEventListener("click", () => orderPanel.classList.remove("is-open"));
+</script>
+</body>
+</html>
